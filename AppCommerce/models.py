@@ -7,6 +7,9 @@ class Usuario(models.Model):
     contrasenia=models.CharField(max_length=8)
     email=models.EmailField()
 
+    def __str__(self) -> str:
+        return self.nombre
+
 class Billetera(models.Model):
 
     usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)    
