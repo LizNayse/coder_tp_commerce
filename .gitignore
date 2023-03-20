@@ -1,5 +1,2 @@
-AppCommerce/__pycache__/admin.cpython-39.pyc
-AppCommerce/__pycache__/models.cpython-39.pyc
-AppCommerce/__pycache__/urls.cpython-39.pyc
-AppCommerce/__pycache__/views.cpython-39.pyc
-AppCommerce/__pycache__/*
+AppCommerce/__pycache__
+AppCommerce/migrations/__pycache__

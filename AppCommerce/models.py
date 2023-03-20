@@ -22,14 +22,10 @@ class Billetera(models.Model):
 
 class Producto(models.Model):
 
+    usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)
     nombre=models.CharField(max_length=256)
     descripcion=models.CharField(max_length=600)
-
-class Publicacion(models.Model):
-
-    producto=models.ForeignKey(Producto, on_delete=models.CASCADE)
     precio=models.IntegerField()
-    stock=models.IntegerField()
 
 class Factura(models.Model):
 

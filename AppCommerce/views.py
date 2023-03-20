@@ -18,22 +18,31 @@ def register(request):
                     usuario.save()
                     billetera = Billetera (usuario=usuario, efectivo=0)
                     billetera.save()
-                    return render(request, 'AppCommerce/bienvenida.html', {"usuario":usuario})
+                    return render(request, 'AppCommerce/usuario.html', {"usuario":usuario})
                 else:
                     return render(request, "AppCommerce/register.html", {"falla_contrasenia":True})
         return render(request, "AppCommerce/register.html")
 
 
 def login(request):
+        if 'usuario_id' in request.session:
+             u_id = request.session['usuario_id']
+             usuario = Usuario.objects.get(pk=u_id)
+             return render(request, 'AppCommerce/usuario.html', {"usuario":usuario})
         if request.method == 'POST':
             try:
                 usuario = Usuario.objects.get(email=request.POST['email'])
                 if usuario.contrasenia == request.POST['contrasenia']:
-                    return render(request, 'AppCommerce/bienvenida.html', {"usuario":usuario})     
+                    request.session['usuario_id'] = usuario.id
+                    return render(request, 'AppCommerce/usuario.html', {"usuario":usuario})     
                 return render(request, 'AppCommerce/login.html', {"contrasenia_invalida":True})
             except:
                  return render(request, 'AppCommerce/login.html', {"usuario_inexistente":True})
         return render(request, "AppCommerce/login.html")
+
+def logout(request):
+     del request.session['usuario_id']
+     return render(request, 'AppCommerce/login.html')
 
 def billetera(request, usuarioid):
     usuario = Usuario.objects.get(pk=usuarioid)

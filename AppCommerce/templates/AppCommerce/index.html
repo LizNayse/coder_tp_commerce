@@ -26,7 +26,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'register' %}">Registrarme</a></li>
                     </ul>  
                 {% else %}
-                    <a class="navbar-brand" href="{% url 'login' %}">Log out</a>
+                    <a class="navbar-brand" href="{% url 'logout' %}">Log out</a>
                     <form class="d-flex">
                         <a class="navbar-brand" href="{% url 'billetera' usuario.id %}">Billetera Virtual</a>
                         <button class="btn btn-outline-dark" href="#">
