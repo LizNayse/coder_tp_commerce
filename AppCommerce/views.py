@@ -9,12 +9,16 @@ def index(request):
 
 def register(request):
         if request.method == 'POST':
-              if request.POST['contrasenia'] == request.POST['contrasenia_verificacion']:
-                usuario = Usuario (nombre=request.POST['nombre'], contrasenia=request.POST['contrasenia'], email=request.POST['email'])
-                usuario.save()
-                return render(request, 'AppCommerce/index.html')
-              else:
-                return render(request, "AppCommerce/register.html", {"falla_contrasenia":True})
+            try:
+                usuario = Usuario.objects.get(email=request.POST['email'])
+                return render(request, "AppCommerce/register.html", {"falla_usuario_existente":True})
+            except:
+                if request.POST['contrasenia'] == request.POST['contrasenia_verificacion']:
+                    usuario = Usuario (nombre=request.POST['nombre'], contrasenia=request.POST['contrasenia'], email=request.POST['email'])
+                    usuario.save()
+                    return render(request, 'AppCommerce/bienvenida.html', {"usuario"})
+                else:
+                    return render(request, "AppCommerce/register.html", {"falla_contrasenia":True})
         return render(request, "AppCommerce/register.html")
 
 

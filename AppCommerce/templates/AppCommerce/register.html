@@ -6,6 +6,10 @@
 <h1>La contraseña no coincide</h1>
 {% endif %}
 
+{% if falla_usuario_existente %}
+<h1>Ya existe un usuario con ese email registrado</h1>
+{% endif %}
+
 <form action="{% url 'register' %}" method="POST">
     {% csrf_token %}
     <p>Nombre de usuario: <input type="text" name="nombre"></p>
