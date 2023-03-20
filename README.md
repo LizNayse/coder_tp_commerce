@@ -16,5 +16,5 @@ Actualmente los usuarios pueden realizar las siguientes acciones:
 
 - Iniciar Sesión
 - Registrarse
-- Acceder a su billetera virtual y cargar saldo -
+- Acceder a su billetera virtual y cargar saldo
 
