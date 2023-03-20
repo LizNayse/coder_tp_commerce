@@ -4,7 +4,7 @@
 
 <h2> Bienvenido {{ usuario.nombre }}, actualmente contas con este saldo {{ usuario.billetera.efectivo }}</h2>
 <br>
-<form action="{% url 'billetera' usuario.id %}" method="POST">
+<form action="{% url 'billetera' %}" method="POST">
     {% csrf_token %}
     <p>Ingresar efectivo <input type="number" name="efectivo" id="efectivo"></p>
     <input type="submit" value="Cargar"/>

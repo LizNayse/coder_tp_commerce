@@ -7,5 +7,5 @@ urlpatterns = [
     path('login', views.login, name="login"),
     path('logout', views.logout, name="logout"),
     path('usuario', views.login, name="usuario"),
-    path('billetera/<int:usuarioid>', views.billetera, name="billetera")
+    path('billetera', views.billetera, name="billetera")
 ]

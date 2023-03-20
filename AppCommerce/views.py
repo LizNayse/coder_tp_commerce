@@ -44,8 +44,9 @@ def logout(request):
      del request.session['usuario_id']
      return render(request, 'AppCommerce/login.html')
 
-def billetera(request, usuarioid):
-    usuario = Usuario.objects.get(pk=usuarioid)
+def billetera(request):
+    u_id = request.session['usuario_id']
+    usuario = Usuario.objects.get(pk=u_id)
     if request.method == 'POST':
         usuario.billetera.efectivo +=  int(request.POST['efectivo'])
         usuario.billetera.save()

@@ -1,2 +1,3 @@
 AppCommerce/__pycache__
 AppCommerce/migrations/__pycache__
+db.sqlite3
