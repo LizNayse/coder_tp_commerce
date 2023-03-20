@@ -16,7 +16,9 @@ def register(request):
                 if request.POST['contrasenia'] == request.POST['contrasenia_verificacion']:
                     usuario = Usuario (nombre=request.POST['nombre'], contrasenia=request.POST['contrasenia'], email=request.POST['email'])
                     usuario.save()
-                    return render(request, 'AppCommerce/bienvenida.html', {"usuario"})
+                    billetera = Billetera (usuario=usuario, efectivo=0)
+                    billetera.save()
+                    return render(request, 'AppCommerce/bienvenida.html', {"usuario":usuario})
                 else:
                     return render(request, "AppCommerce/register.html", {"falla_contrasenia":True})
         return render(request, "AppCommerce/register.html")
@@ -32,3 +34,10 @@ def login(request):
             except:
                  return render(request, 'AppCommerce/login.html', {"usuario_inexistente":True})
         return render(request, "AppCommerce/login.html")
+
+def billetera(request, usuarioid):
+    usuario = Usuario.objects.get(pk=usuarioid)
+    if request.method == 'POST':
+        usuario.billetera.efectivo +=  int(request.POST['efectivo'])
+        usuario.billetera.save()
+    return render(request, "AppCommerce/billetera.html", {"usuario":usuario})

@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+
 class Usuario(models.Model):
 
     nombre=models.CharField(max_length=256)
@@ -9,11 +10,15 @@ class Usuario(models.Model):
 
     def __str__(self) -> str:
         return self.nombre
-
+    
 class Billetera(models.Model):
 
-    usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)    
-    efectivo=models.IntegerField()
+    usuario=models.OneToOneField(
+        Usuario,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    efectivo=models.IntegerField(default=0)
 
 class Producto(models.Model):
 
