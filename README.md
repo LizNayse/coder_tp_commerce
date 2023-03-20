@@ -14,7 +14,7 @@ Se ingresa al proyecto a traves de host/commerce/
 
 Actualmente los usuarios pueden realizar las siguientes acciones:
 
-- Iniciar Sesión
-- Registrarse
-- Acceder a su billetera virtual y cargar saldo
+- Registrarse: A travez del link en el header.
+- Iniciar Sesión:  A travez del link en el header.
+- Acceder a su billetera virtual y cargar saldo: Es requisito crear un usuario e iniciar sesión para tener acceso a la billetera. El acceso es por link en el header.
 
