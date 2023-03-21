@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
+from django.urls import reverse
+import traceback
 
 # Create your views here.
 def index(request):
@@ -52,3 +54,27 @@ def billetera(request):
         usuario.billetera.efectivo +=  int(request.POST['efectivo'])
         usuario.billetera.save()
     return render(request, "AppCommerce/billetera.html", {"usuario":usuario})
+
+def publicar_producto(request):
+     u_id = request.session['usuario_id']
+     usuario = Usuario.objects.get(pk=u_id)
+     if request.method == 'POST':
+        try:
+            nombre = request.POST['nombre']
+            descripcion = request.POST['descripcion']
+            categoria = request.POST['categoria']
+            precio = request.POST['precio']
+            cantidad = request.POST['cantidad']
+            producto = Producto (usuario=usuario, nombre=nombre, descripcion=descripcion, categoria=categoria, cantidad=cantidad, precio=precio)
+            producto.save()
+            return HttpResponseRedirect(reverse('producto_publicado', args=(producto.id, )))
+        except:
+             traceback.print_exc()
+             return render(request, "AppCommerce/publicar.html", {"fallo_creacion":True})
+     return render(request, "AppCommerce/publicar.html", {"usuario":usuario})
+
+def producto_publicado(request, producto_id):
+    u_id = request.session['usuario_id']
+    usuario = Usuario.objects.get(pk=u_id)
+    producto = Producto.objects.get(pk=producto_id)
+    return render(request, "AppCommerce/producto_publicado.html", {"usuario":usuario, "producto":producto})

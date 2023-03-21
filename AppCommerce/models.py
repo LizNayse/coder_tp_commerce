@@ -20,12 +20,20 @@ class Billetera(models.Model):
     )
     efectivo=models.IntegerField(default=0)
 
+    def __str__(self) -> str:
+        return "Billetera de %s" %(self.usuario)
+
 class Producto(models.Model):
 
     usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)
     nombre=models.CharField(max_length=256)
     descripcion=models.CharField(max_length=600)
+    categoria=models.CharField(max_length=600)
+    cantidad=models.IntegerField()
     precio=models.IntegerField()
+
+    def __str__(self) -> str:
+        return "Producto %s de la categoría %s" %(self.nombre, self.categoria)
 
 class Factura(models.Model):
 

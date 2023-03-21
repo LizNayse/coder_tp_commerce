@@ -1,0 +1,22 @@
+{% extends "AppCommerce/index.html" %}
+
+{% block content %}
+{% if fallo_creacion %}
+<h2> Fallo la creación del producto </h2>
+{% else %}
+<h2> Bienvenido {{ usuario.nombre }}, vamos a crear un producto para publicar y vender</h2>
+<br>
+<form action="{% url 'publicar' %}" method="POST">
+    {% csrf_token %}
+    <p>Nombre del producto: <input type="text" name="nombre"></p>
+    <p>Descripción del producto: <input type="text" name="descripcion"></p>
+    <p>Categoría: <input type="text" name="categoria"></p>
+    <p>Precio: <input type="text" name="precio"></p>
+    <p>Cantidad disponible: <input type="number" name="cantidad"></p>
+    <input type="submit" value="Publicar"/>
+</form>
+<br>
+{% endif %}
+<a href="{% url 'usuario' %}">Volver</a>
+
+{% endblock %}
