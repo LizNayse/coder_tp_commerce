@@ -18,6 +18,7 @@ def register(request):
                     usuario.save()
                     billetera = Billetera (usuario=usuario, efectivo=0)
                     billetera.save()
+                    request.session['usuario_id'] = usuario.id
                     return render(request, 'AppCommerce/usuario.html', {"usuario":usuario})
                 else:
                     return render(request, "AppCommerce/register.html", {"falla_contrasenia":True})
